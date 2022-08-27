@@ -5,8 +5,8 @@ Dashboard to display stats from your Spotify account, inspired by Spotify Wrappe
 ### High-level technology learning goals
 - Exposure with external APIs/SDKs (in this case, the [Spotify API](https://developer.spotify.com/)
 - Front end dev practice with React
+- Gain exposure building a backend with Python (FastAPI)
 - Gain exposure with Jest (or similar testing framework)
-- Gain exposure building a backend with Python
 - Gain exposure bundling with Webpack
 - Work with Spotify's design system for a consistent experience between my app and Spotify
 
@@ -16,7 +16,6 @@ Dashboard to display stats from your Spotify account, inspired by Spotify Wrappe
 - Be able to adjust time range for whole dashboard to show information for the past: 7 days, 1 month, 6 months, 1 year
 
 ### Stretch goal feature ideas
-- Deploy/host on Vercel(?)
 - Add an "In case you missed it" widget to dashboard that randomly displays a song from user's previous week's Discover Weekly
 - Be able to adjust time range for individual widgets instead of only per-page
 - Add previous years to time range options (e.g. 2021, 2020, 2019...)
