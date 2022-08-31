@@ -17,7 +17,7 @@ const getData = async (url = '') => {
       'Content-Type': 'application/json',
     },
   });
-  return response.text();
+  return response.json();
 };
 
 getData('/')
