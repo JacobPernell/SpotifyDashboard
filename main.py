@@ -1,6 +1,6 @@
 import base64
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Response
 from fastapi.responses import RedirectResponse
 from urllib.parse import urlencode
 
@@ -40,8 +40,12 @@ async def callback(request: Request):
         headers = {"Authorization": f"Basic {b64_client_id_secret}", "Content-Type": "application/x-www-form-urlencoded"}
         r = httpx.post(spotify_request_access_token_url, data=callback_params, headers=headers)
         response = r.json()
-        ACCESS_TOKEN = response['access_token']
-        REFRESH_TOKEN = response['refresh_token']
+        print("r headers: ", r.headers)
+        global access_token
+        global refresh_token
+        access_token = response['access_token']
+        refresh_token = response['refresh_token']
+        # print(access_token)
         return response
     except:
         params = request.query_params
@@ -51,7 +55,7 @@ async def callback(request: Request):
 
 # Broken, currently returns: {"error":"invalid_grant","error_description":"Invalid refresh token"}
 @app.get("/refresh_token")
-async def refresh_token(request: Request):
+async def request_refresh_token(request: Request):
     try:
         params = request.query_params
         b64_client_id_secret = base64.urlsafe_b64encode((CLIENT_ID + ":" + CLIENT_SECRET).encode()).decode()
@@ -64,3 +68,17 @@ async def refresh_token(request: Request):
         params = request.query_params
         error_params = {"error": params['error'], "state": params['state']}
         print('error with /callback', error_params)
+
+
+@app.get("/top_artists")
+async def get_top_artists():
+    print("/top_artists access token: ", access_token)
+    try:
+        headers = {"Authorization": f"Bearer {access_token}"}
+        payload = {"type": "artists"}
+        r = httpx.get("https://api.spotify.com/v1/me/top/", headers=headers, data=payload)
+        response = r.json()
+        return response
+    except:
+        print("Error with /top_artists")
+
