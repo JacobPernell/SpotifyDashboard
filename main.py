@@ -1,6 +1,6 @@
 import base64
 
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Request
 from fastapi.responses import RedirectResponse
 from urllib.parse import urlencode
 
@@ -10,8 +10,8 @@ app = FastAPI()
 
 spotify_auth_url = 'https://accounts.spotify.com/authorize?'
 response_type = 'code'
-CLIENT_ID = ''
-CLIENT_SECRET = ''
+CLIENT_ID = input("Spotify CLIENT ID: ")
+CLIENT_SECRET = input("Spotify CLIENT SECRET: ")
 scope = 'user-read-private user-read-email'
 redirect_uri = 'http://127.0.0.1:8000/callback'
 code_challenge_method = 'S256'
@@ -19,8 +19,9 @@ params = {'response_type': response_type, 'client_id': CLIENT_ID, 'scope': scope
 full_auth_url = spotify_auth_url + urlencode(params)
 
 spotify_request_access_token_url = 'https://accounts.spotify.com/api/token'
-access_token = ''
-refresh_token = ''
+
+cookies = httpx.Cookies()
+print(cookies)
 
 
 @app.get("/api/login")
@@ -40,12 +41,9 @@ async def callback(request: Request):
         headers = {"Authorization": f"Basic {b64_client_id_secret}", "Content-Type": "application/x-www-form-urlencoded"}
         r = httpx.post(spotify_request_access_token_url, data=callback_params, headers=headers)
         response = r.json()
-        print("r headers: ", r.headers)
-        global access_token
-        global refresh_token
-        access_token = response['access_token']
-        refresh_token = response['refresh_token']
-        # print(access_token)
+        cookies.set('access_token', response['access_token'])
+        cookies.set('refresh_token', response['refresh_token'])
+        print(cookies)
         return response
     except:
         params = request.query_params
@@ -70,15 +68,13 @@ async def request_refresh_token(request: Request):
         print('error with /callback', error_params)
 
 
-@app.get("/top_artists")
+@app.get("/me")
 async def get_top_artists():
-    print("/top_artists access token: ", access_token)
     try:
-        headers = {"Authorization": f"Bearer {access_token}"}
-        payload = {"type": "artists"}
-        r = httpx.get("https://api.spotify.com/v1/me/top/", headers=headers, data=payload)
+        headers = {"Authorization": f"Bearer {cookies['access_token']}"}
+        r = httpx.get("https://api.spotify.com/v1/me", headers=headers)
         response = r.json()
         return response
     except:
-        print("Error with /top_artists")
+        print("Error with /me")
 
