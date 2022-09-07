@@ -11,7 +11,7 @@ Dashboard to display stats from your Spotify account, inspired by Spotify Wrappe
 - Work with Spotify's design system for a consistent experience between my app and Spotify
 
 ### MVP features
-- Login/authenticate with Spotify account (display privacy policy, and make it easy to disconnect account as well)
+- Login/authenticate with Spotify account
 - Display a dashboard with a few widgets that show: top 10 listened artists, top 10 listened songs, a chart of top 10 genres listened to
 - Be able to adjust time range for whole dashboard to show information for the past: 7 days, 1 month, 6 months, 1 year
 
