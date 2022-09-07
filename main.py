@@ -58,7 +58,7 @@ async def request_refresh_token(request: Request):
         params = request.query_params
         b64_client_id_secret = base64.urlsafe_b64encode((CLIENT_ID + ":" + CLIENT_SECRET).encode()).decode()
         headers = {"Authorization": f"Basic {b64_client_id_secret}", "Content-Type": "application/x-www-form-urlencoded"}
-        payload = {"grant_type": "refresh_token", "refresh_token": refresh_token}
+        payload = {"grant_type": "refresh_token", "refresh_token": cookies['refresh_token']}
         r = httpx.post(spotify_request_access_token_url, data=payload, headers=headers)
         response = r.json()
         return response

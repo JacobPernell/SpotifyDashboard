@@ -1,0 +1,13 @@
+@import './styles/common/variables';
+
+#container {
+  background-color: $SPOTIFY-BLACK;
+  height: 100vh;
+  width: 100vw;
+  padding: 1rem;
+  font-family: 'DM Sans', sans-serif;
+}
+
+h1 {
+  color: $SPOTIFY-GREEN;
+}
