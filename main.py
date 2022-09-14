@@ -74,6 +74,7 @@ async def get_top_artists():
         headers = {"Authorization": f"Bearer {cookies['access_token']}"}
         r = httpx.get("https://api.spotify.com/v1/me", headers=headers)
         response = r.json()
+        print(response)
         return response
     except:
         print("Error with /me")

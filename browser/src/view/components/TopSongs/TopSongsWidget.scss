@@ -1,0 +1,23 @@
+@import '../../../styles/common/variables';
+
+.top-songs-container {
+  display: flex;
+  margin: 1rem 0;
+
+  &__album-art {
+    width: 100px;
+    height: 100px;
+    background-color: $SPOTIFY-GREEN;
+    margin-right: 0.75rem;
+  }
+
+  &__album-info {
+    span {
+      margin-bottom: 0.1rem;
+    }
+
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2rem;
+  }
+}

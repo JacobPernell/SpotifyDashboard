@@ -5,9 +5,11 @@
   height: 100vh;
   width: 100vw;
   padding: 1rem;
-  font-family: 'DM Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
 }
 
 h1 {
   color: $SPOTIFY-GREEN;
+  margin-bottom: 1.5rem;
 }

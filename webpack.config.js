@@ -4,7 +4,10 @@ module.exports = {
   entry: './browser/src/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, '/browser/dist'),
+    path: path.resolve(__dirname, './browser/dist'),
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.css', '.scss'],
   },
   devServer: {
     static: './browser/dist',
