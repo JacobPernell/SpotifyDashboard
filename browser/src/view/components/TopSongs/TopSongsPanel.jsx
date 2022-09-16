@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './TopSongsPanel.scss';
 import { TopSongsWidget } from './TopSongsWidget';
 
-export const TopSongsPanel = () => {
+export const TopSongsPanel = ({ songs }) => {
+  // console.log(songs);
+  const generateTopSongsWidgets = () => {
+    songs.forEach(song => {
+      console.log(song);
+      return (
+        <TopSongsWidget song={song.songName} albumTitle={song.songAlbum} artist={song.artists} />
+      );
+    });
+  };
+
+  useEffect(() => {
+    generateTopSongsWidgets();
+  });
+
   return (
     <div id='top-songs-container'>
       <span id='top-songs-title'>Top 10 Songs</span>
+      {/* {generateTopSongsWidgets()} */}
       <TopSongsWidget
         song='The best song is cool yay'
         albumTitle='Album title'

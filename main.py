@@ -21,7 +21,7 @@ spotify_auth_url = 'https://accounts.spotify.com/authorize?'
 response_type = 'code'
 CLIENT_ID = input("Spotify CLIENT ID: ")
 CLIENT_SECRET = input("Spotify CLIENT SECRET: ")
-scope = 'user-read-private user-read-email user-top-read user-library-read'
+scope = 'user-read-private user-read-email user-top-read user-library-read user-follow-read'
 redirect_uri = 'http://127.0.0.1:8000/callback'
 code_challenge_method = 'S256'
 params = {'response_type': response_type, 'client_id': CLIENT_ID, 'scope': scope, 'redirect_uri': redirect_uri, 'code_challenge_method': code_challenge_method }
@@ -81,9 +81,44 @@ async def request_refresh_token(request: Request):
 async def get_top_artists():
     try:
         headers = {"Authorization": f"Bearer {cookies['access_token']}"}
-        r = httpx.get("https://api.spotify.com/v1/me/top/artists", headers=headers)
+        params = {"limit": 10}
+        r = httpx.get("https://api.spotify.com/v1/me/top/artists", headers=headers, params=params)
         response = r.json()
         return response
     except:
         return 'Error getting top artists -- did you auth with /api/login first?'
 
+
+@app.get("/top-songs")
+async def get_top_songs():
+    try:
+        headers = {"Authorization": f"Bearer {cookies['access_token']}"}
+        params = {"limit": 10}
+        r = httpx.get("https://api.spotify.com/v1/me/top/tracks", headers=headers, params=params)
+        response = r.json()
+        return response
+    except:
+        return 'Error getting top songs -- did you auth with /api/login first?'
+
+
+@app.get("/following")
+async def get_followed_artists():
+    try:
+        headers = {"Authorization": f"Bearer {cookies['access_token']}"}
+        params = {"type:" "artist"}
+        r = httpx.get("https://api.spotify.com/v1/me/following?type=artist", headers=headers)
+        response = r.json()
+        return response
+    except:
+        return 'Error getting followed artists -- did you auth with /api/login first?'
+
+
+@app.get("/me")
+async def get_my_profile():
+    try:
+        headers = {"Authorization": f"Bearer {cookies['access_token']}"}
+        r = httpx.get("https://api.spotify.com/v1/me", headers=headers)
+        response = r.json()
+        return response
+    except:
+        return 'Error getting my profile info -- did you auth with /api/login first?'
