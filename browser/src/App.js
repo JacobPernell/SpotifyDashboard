@@ -4,12 +4,14 @@ import { fetchSpotifyAPI } from '../utils/fetchSpotifyAPI';
 
 export const App = () => {
   const populateTopSongs = () => {
-    fetchSpotifyAPI(
-      'http://localhost:8000/me',
-      { method: 'GET' },
-      () => console.log('top songs success'),
-      () => console.log('top songs error')
-    );
+    fetchSpotifyAPI({
+      url: 'http://localhost:8000/top-artists',
+      options: {
+        method: 'GET',
+      },
+      success: data => console.log('top songs success', data),
+      fail: err => console.log('top songs error', err),
+    });
   };
 
   useEffect(() => {

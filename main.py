@@ -2,17 +2,26 @@ import base64
 
 from fastapi import FastAPI, Request
 from fastapi.responses import RedirectResponse
+from fastapi.middleware.cors import CORSMiddleware
 from urllib.parse import urlencode
 
 import httpx
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 spotify_auth_url = 'https://accounts.spotify.com/authorize?'
 response_type = 'code'
 CLIENT_ID = input("Spotify CLIENT ID: ")
 CLIENT_SECRET = input("Spotify CLIENT SECRET: ")
-scope = 'user-read-private user-read-email'
+scope = 'user-read-private user-read-email user-top-read user-library-read'
 redirect_uri = 'http://127.0.0.1:8000/callback'
 code_challenge_method = 'S256'
 params = {'response_type': response_type, 'client_id': CLIENT_ID, 'scope': scope, 'redirect_uri': redirect_uri, 'code_challenge_method': code_challenge_method }
@@ -68,14 +77,13 @@ async def request_refresh_token(request: Request):
         print('error with /callback', error_params)
 
 
-@app.get("/me")
+@app.get("/top-artists")
 async def get_top_artists():
     try:
         headers = {"Authorization": f"Bearer {cookies['access_token']}"}
-        r = httpx.get("https://api.spotify.com/v1/me", headers=headers)
+        r = httpx.get("https://api.spotify.com/v1/me/top/artists", headers=headers)
         response = r.json()
-        print(response)
         return response
     except:
-        print("Error with /me")
+        return 'Error getting top artists -- did you auth with /api/login first?'
 
