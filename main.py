@@ -33,6 +33,16 @@ cookies = httpx.Cookies()
 print(cookies)
 
 
+def _transform_data(data):
+    return {
+        'songID': data['id'],
+        'songName': data['name'],
+        'songAlbum': data['album']['name'],
+        'songArtists': data['artists'][0],
+        'songURL': data['external_urls']['spotify'],
+        'songImage': data['album']['images'][0]['url'] if len(data['album']['images']) else None,
+    }
+
 @app.get("/api/login")
 async def request_login():
     try:
@@ -60,23 +70,6 @@ async def callback(request: Request):
         print('error with /callback', error_params)
 
 
-# Broken, currently returns: {"error":"invalid_grant","error_description":"Invalid refresh token"}
-@app.get("/refresh_token")
-async def request_refresh_token(request: Request):
-    try:
-        params = request.query_params
-        b64_client_id_secret = base64.urlsafe_b64encode((CLIENT_ID + ":" + CLIENT_SECRET).encode()).decode()
-        headers = {"Authorization": f"Basic {b64_client_id_secret}", "Content-Type": "application/x-www-form-urlencoded"}
-        payload = {"grant_type": "refresh_token", "refresh_token": cookies['refresh_token']}
-        r = httpx.post(spotify_request_access_token_url, data=payload, headers=headers)
-        response = r.json()
-        return response
-    except:
-        params = request.query_params
-        error_params = {"error": params['error'], "state": params['state']}
-        print('error with /callback', error_params)
-
-
 @app.get("/top-artists")
 async def get_top_artists():
     try:
@@ -96,7 +89,7 @@ async def get_top_songs():
         params = {"limit": 10}
         r = httpx.get("https://api.spotify.com/v1/me/top/tracks", headers=headers, params=params)
         response = r.json()
-        return response
+        return [_transform_data(song_data) for song_data in response['items']]
     except:
         return 'Error getting top songs -- did you auth with /api/login first?'
 
@@ -105,12 +98,12 @@ async def get_top_songs():
 async def get_followed_artists():
     try:
         headers = {"Authorization": f"Bearer {cookies['access_token']}"}
-        params = {"type:" "artist"}
         r = httpx.get("https://api.spotify.com/v1/me/following?type=artist", headers=headers)
         response = r.json()
         return response
     except:
         return 'Error getting followed artists -- did you auth with /api/login first?'
+
 
 
 @app.get("/me")
