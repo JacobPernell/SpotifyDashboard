@@ -1,10 +1,10 @@
 import React from 'react';
 import './TopSongsWidget.scss';
 
-export const TopSongsWidget = ({ song, albumArt, albumTitle, artist }) => {
+export const TopSongsWidget = ({ song, albumImage, albumTitle, artist }) => {
   return (
     <div className='top-songs-container'>
-      <div className='top-songs-container__album-art'></div>
+      <img src={albumImage} alt={artist} className='top-songs-container__album-art' />
       <div className='top-songs-container__album-info'>
         <span>
           <strong>{song}</strong>

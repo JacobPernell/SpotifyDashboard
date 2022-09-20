@@ -11,6 +11,7 @@ export const TopSongsPanel = ({ songs }) => {
           <TopSongsWidget
             song={song.songName}
             albumTitle={song.songAlbum}
+            albumImage={song.songImage}
             artist={song.artists}
             key={song.songID}
           />
