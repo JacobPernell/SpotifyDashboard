@@ -3,11 +3,14 @@ import base64
 from fastapi import FastAPI, Request
 from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from urllib.parse import urlencode
 
 import httpx
 
 app = FastAPI()
+
+app.mount("/", StaticFiles(directory="./dist", html=True), name="dist")
 
 app.add_middleware(
     CORSMiddleware,

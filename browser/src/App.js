@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { TopSongsPanel } from './view/components/TopSongs/TopSongsPanel';
-import { TopArtistsPanel } from './view/components/TopArtists/TopArtistsPanel';
+import { TopSongsPanel } from './view/components/Panel/TopSongsPanel';
+import { TopArtistsPanel } from './view/components/Panel/TopArtistsPanel';
 import { fetchSpotifyAPI } from '../utils/fetchSpotifyAPI';
 
 export const App = () => {

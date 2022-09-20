@@ -1,17 +1,18 @@
 @import '../../../styles/common/variables';
 
-#top-artists-container {
+#top-panel-container {
   display: flex;
   flex-direction: column;
   border: 2px solid $SPOTIFY-WHITE;
   border-radius: 0.5rem;
   color: $SPOTIFY-WHITE;
   width: 40%;
-  // height: 30%;
   padding: 1rem;
+  margin-right: 10rem;
 }
 
-#top-artists-title {
+#top-panel-title {
   font-size: 1.5rem;
   font-weight: 700;
+  color: $SPOTIFY-WHITE;
 }

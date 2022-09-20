@@ -1,11 +1,11 @@
 import React from 'react';
-import './TopArtistsPanel.scss';
-import { TopArtistsWidget } from './TopArtistsWidget';
+import './TopPanel.scss';
+import { TopArtistsWidget } from '../PanelWidget/TopArtistsWidget';
 
 export const TopArtistsPanel = ({ artists }) => {
   return (
-    <div id='top-artists-container'>
-      <span id='top-artists-title'>Top 10 Artists</span>
+    <div id='top-panel-container'>
+      <h1 id='top-panel-title'>Top 10 Artists</h1>
       {artists.map(artist => {
         return (
           <TopArtistsWidget
