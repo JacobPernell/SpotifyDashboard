@@ -30,10 +30,9 @@ full_auth_url = spotify_auth_url + urlencode(params)
 spotify_request_access_token_url = 'https://accounts.spotify.com/api/token'
 
 cookies = httpx.Cookies()
-print(cookies)
 
 
-def _transform_data(data):
+def _transform_songs_data(data):
     return {
         'songID': data['id'],
         'songName': data['name'],
@@ -42,6 +41,16 @@ def _transform_data(data):
         'songURL': data['external_urls']['spotify'],
         'songImage': data['album']['images'][0]['url'] if len(data['album']['images']) else None,
     }
+
+def _transform_artist_data(data):
+    return {
+        'artistID': data['id'],
+        'artistName': data['name'],
+        'artistURL': data['external_urls']['spotify'],
+        'artistImage': data['images'][0]['url'] if len(data['images']) else None,
+    }
+
+
 
 @app.get("/api/login")
 async def request_login():
@@ -62,7 +71,6 @@ async def callback(request: Request):
         response = r.json()
         cookies.set('access_token', response['access_token'])
         cookies.set('refresh_token', response['refresh_token'])
-        print(cookies)
         return response
     except:
         params = request.query_params
@@ -77,7 +85,7 @@ async def get_top_artists():
         params = {"limit": 10}
         r = httpx.get("https://api.spotify.com/v1/me/top/artists", headers=headers, params=params)
         response = r.json()
-        return response
+        return [_transform_artist_data(artist_data) for artist_data in response['items']]
     except:
         return 'Error getting top artists -- did you auth with /api/login first?'
 
@@ -89,7 +97,7 @@ async def get_top_songs():
         params = {"limit": 10}
         r = httpx.get("https://api.spotify.com/v1/me/top/tracks", headers=headers, params=params)
         response = r.json()
-        return [_transform_data(song_data) for song_data in response['items']]
+        return [_transform_songs_data(song_data) for song_data in response['items']]
     except:
         return 'Error getting top songs -- did you auth with /api/login first?'
 

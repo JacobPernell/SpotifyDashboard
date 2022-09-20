@@ -9,6 +9,11 @@
   flex-direction: column;
 }
 
+#panels {
+  display: flex;
+  flex-direction: row;
+}
+
 h1 {
   color: $SPOTIFY-GREEN;
   margin-bottom: 1.5rem;

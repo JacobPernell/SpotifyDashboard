@@ -1,17 +1,17 @@
 @import '../../../styles/common/variables';
 
-#top-songs-container {
+#top-artists-container {
   display: flex;
   flex-direction: column;
   border: 2px solid $SPOTIFY-WHITE;
   border-radius: 0.5rem;
   color: $SPOTIFY-WHITE;
   width: 40%;
+  // height: 30%;
   padding: 1rem;
-  margin-right: 10rem;
 }
 
-#top-songs-title {
+#top-artists-title {
   font-size: 1.5rem;
   font-weight: 700;
 }

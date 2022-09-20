@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './TopSongsPanel.scss';
 import { TopSongsWidget } from './TopSongsWidget';
 
@@ -8,7 +8,12 @@ export const TopSongsPanel = ({ songs }) => {
       <span id='top-songs-title'>Top 10 Songs</span>
       {songs.map(song => {
         return (
-          <TopSongsWidget song={song.songName} albumTitle={song.songAlbum} artist={song.artists} />
+          <TopSongsWidget
+            song={song.songName}
+            albumTitle={song.songAlbum}
+            artist={song.artists}
+            key={song.songID}
+          />
         );
       })}
     </div>
