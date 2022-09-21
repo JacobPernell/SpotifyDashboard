@@ -1,19 +1,25 @@
-@import '../../../styles/common/variables';
+@import '../../styles/common/variables';
 
-.top-songs-container {
+.widget-container {
   display: flex;
   margin: 1rem 0;
 
-  &__album-art {
+  &__art {
     width: 100px;
     height: 100px;
     background-color: $SPOTIFY-GREEN;
     margin-right: 0.75rem;
   }
 
-  &__album-info {
-    span {
+  &__info {
+    a {
+      color: inherit;
+      text-decoration: none;
       margin-bottom: 0.1rem;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
 
     display: flex;

@@ -1,14 +1,14 @@
 import React from 'react';
-import './TopArtistsWidget.scss';
+import '../TopWidget.scss';
 
 export const TopArtistsWidget = ({ artist, artistImage, artistURL }) => {
   return (
-    <div className='top-artists-container'>
-      <img src={artistImage} alt={artist} className='top-artists-container__artist-art' />
-      <div className='top-artists-container__artist-info'>
-        <span>
+    <div className='widget-container'>
+      <img src={artistImage} alt={artist} className='widget-container__art' />
+      <div className='widget-container__info'>
+        <a href={artistURL} target='_blank'>
           <strong>{artist}</strong>
-        </span>
+        </a>
       </div>
     </div>
   );

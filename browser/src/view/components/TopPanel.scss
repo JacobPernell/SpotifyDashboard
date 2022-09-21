@@ -1,6 +1,6 @@
-@import '../../../styles/common/variables';
+@import '../../styles/common/variables';
 
-#top-artists-container {
+.panel-container {
   display: flex;
   flex-direction: column;
   border: 2px solid $SPOTIFY-WHITE;
@@ -9,9 +9,10 @@
   width: 40%;
   // height: 30%;
   padding: 1rem;
-}
 
-#top-artists-title {
-  font-size: 1.5rem;
-  font-weight: 700;
+  &__title {
+    color: $SPOTIFY-WHITE;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
 }

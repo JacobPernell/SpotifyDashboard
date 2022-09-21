@@ -1,11 +1,11 @@
 import React from 'react';
-import './TopSongsPanel.scss';
+import '../TopPanel.scss';
 import { TopSongsWidget } from './TopSongsWidget';
 
 export const TopSongsPanel = ({ songs }) => {
   return (
-    <div id='top-songs-container'>
-      <span id='top-songs-title'>Top 10 Songs</span>
+    <div className='panel-container'>
+      <h1 className='panel-container__title'>Top Songs</h1>
       {songs.map(song => {
         return (
           <TopSongsWidget
@@ -13,6 +13,7 @@ export const TopSongsPanel = ({ songs }) => {
             albumTitle={song.songAlbum}
             albumImage={song.songImage}
             artist={song.artists}
+            songURL={song.songURL}
             key={song.songID}
           />
         );

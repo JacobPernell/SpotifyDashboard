@@ -1,4 +1,7 @@
+import os
 import base64
+
+from dotenv import load_dotenv
 
 from fastapi import FastAPI, Request
 from fastapi.responses import RedirectResponse
@@ -6,6 +9,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from urllib.parse import urlencode
 
 import httpx
+
+load_dotenv()
 
 app = FastAPI()
 
@@ -19,8 +24,8 @@ app.add_middleware(
 
 spotify_auth_url = 'https://accounts.spotify.com/authorize?'
 response_type = 'code'
-CLIENT_ID = input("Spotify CLIENT ID: ")
-CLIENT_SECRET = input("Spotify CLIENT SECRET: ")
+CLIENT_ID = os.getenv('CLIENT_ID')
+CLIENT_SECRET = os.getenv('CLIENT_SECRET')
 scope = 'user-read-private user-read-email user-top-read user-library-read user-follow-read'
 redirect_uri = 'http://127.0.0.1:8000/callback'
 code_challenge_method = 'S256'
