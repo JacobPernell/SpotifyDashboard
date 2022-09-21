@@ -3,13 +3,15 @@
 .panel-container {
   display: flex;
   flex-direction: column;
-  border: 2px solid $SPOTIFY-WHITE;
+  // border: 2px solid $SPOTIFY-WHITE;
   border-radius: 0.5rem;
   color: $SPOTIFY-WHITE;
+  background-color: #251a25;
   padding: 1rem;
   flex: 1;
   height: 100%;
   overflow: auto;
+  box-shadow: 0px 0px 10px rgba($SPOTIFY-BLACK, 0.2);
 
   &__title {
     color: $SPOTIFY-WHITE;

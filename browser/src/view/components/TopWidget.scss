@@ -12,6 +12,12 @@
     background-color: rgba($SPOTIFY-WHITE, $alpha: 0.1);
   }
 
+  &__number {
+    font-size: 0.8rem;
+    color: rgba($color: $SPOTIFY-WHITE, $alpha: 0.7);
+    margin-right: 0.75rem;
+  }
+
   &__art {
     width: 3.5rem;
     height: 3.5rem;
@@ -23,7 +29,6 @@
     a {
       color: inherit;
       text-decoration: none;
-      margin-bottom: 0.1rem;
 
       &:hover {
         text-decoration: underline;
