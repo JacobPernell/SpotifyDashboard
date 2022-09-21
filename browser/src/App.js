@@ -28,7 +28,10 @@ export const App = () => {
 
   return (
     <div id='container'>
-      <h1>Spotify Dashboard</h1>
+      <div id='nav-bar'>
+        <h1>Spotify Dashboard</h1>
+        <div id='nav-bar__username'>Username</div>
+      </div>
       <div id='panels'>
         <TopSongsPanel songs={topSongsData} />
         <TopArtistsPanel artists={topArtistsData} />

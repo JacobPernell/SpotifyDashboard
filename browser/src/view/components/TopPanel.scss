@@ -6,9 +6,10 @@
   border: 2px solid $SPOTIFY-WHITE;
   border-radius: 0.5rem;
   color: $SPOTIFY-WHITE;
-  width: 40%;
-  // height: 30%;
   padding: 1rem;
+  flex: 1;
+  height: 100%;
+  overflow: auto;
 
   &__title {
     color: $SPOTIFY-WHITE;

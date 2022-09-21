@@ -4,17 +4,29 @@
   background-color: $SPOTIFY-BLACK;
   height: 100%;
   width: 100%;
-  padding: 1rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-}
 
-#panels {
-  display: flex;
-  flex-direction: row;
-}
+  #panels {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    height: 100%;
+  }
 
-h1 {
-  color: $SPOTIFY-GREEN;
-  margin-bottom: 1.5rem;
+  #nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    h1 {
+      color: $SPOTIFY-GREEN;
+    }
+
+    &__username {
+      color: $SPOTIFY-WHITE;
+    }
+  }
 }

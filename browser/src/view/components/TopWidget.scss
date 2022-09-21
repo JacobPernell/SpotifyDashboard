@@ -2,13 +2,21 @@
 
 .widget-container {
   display: flex;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  transition: all ease-out 0.18s;
+  border-radius: 0.25rem;
+  align-items: center;
+
+  &:hover {
+    background-color: rgba($SPOTIFY-WHITE, $alpha: 0.1);
+  }
 
   &__art {
-    width: 100px;
-    height: 100px;
+    width: 3.5rem;
+    height: 3.5rem;
     background-color: $SPOTIFY-GREEN;
-    margin-right: 0.75rem;
+    margin-right: 1rem;
   }
 
   &__info {
