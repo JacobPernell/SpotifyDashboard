@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { TopSongsPanel } from './view/components/TopSongs/TopSongsPanel';
 import { TopArtistsPanel } from './view/components/TopArtists/TopArtistsPanel';
+import { SideMenu } from './view/components/SideMenu/SideMenu';
 import { fetchSpotifyAPI } from '../utils/fetchSpotifyAPI';
 
 export const App = () => {
@@ -28,13 +29,12 @@ export const App = () => {
 
   return (
     <div id='container'>
-      <div id='nav-bar'>
-        <h1>Spotify Dashboard</h1>
-        <div id='nav-bar__username'>Username</div>
-      </div>
-      <div id='panels'>
-        <TopSongsPanel songs={topSongsData} />
-        <TopArtistsPanel artists={topArtistsData} />
+      <SideMenu />
+      <div id='content'>
+        <div id='panels'>
+          <TopSongsPanel songs={topSongsData} />
+          <TopArtistsPanel artists={topArtistsData} />
+        </div>
       </div>
     </div>
   );

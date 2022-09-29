@@ -1,0 +1,20 @@
+@import '../../../styles/common/variables';
+
+#side-menu {
+  height: 100vh;
+  width: 25%;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  background-color: #191414;
+
+  &__header {
+    color: $SPOTIFY-GREEN;
+    margin-bottom: 2rem;
+
+    span {
+      font-size: 1.3rem;
+      text-transform: uppercase;
+    }
+  }
+}

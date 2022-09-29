@@ -3,19 +3,18 @@
 .panel-container {
   display: flex;
   flex-direction: column;
-  // border: 2px solid $SPOTIFY-WHITE;
   border-radius: 0.5rem;
   color: $SPOTIFY-WHITE;
-  background-color: #251a25;
+  background-color: #121212;
   padding: 1rem;
   flex: 1;
   height: 100%;
-  overflow: auto;
-  box-shadow: 0px 0px 10px rgba($SPOTIFY-BLACK, 0.2);
+  overflow-y: scroll;
+  box-shadow: 0px 0px 20px rgba($SPOTIFY-BLACK, 0.3);
 
   &__title {
     color: $SPOTIFY-WHITE;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 700;
   }
 }
